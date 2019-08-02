@@ -1,0 +1,79 @@
+<!DOCTYPE Html>
+<html>
+<head>
+	<meta/>
+</head>
+<body onload="startLoop()">
+<div id="container" style="width: 720px; margin-left: 600px;">
+	<div style="width: 100%; font-family: monospace; font-weight: bold;">
+		<h1>it's <div id="days" style="display:inline-block"></div> days until tipoff.</h1>
+		</br>
+		<h2>specifically <div id="seconds" style="display:inline-block"></div> seconds.</h2>
+		</br>
+		<h3>equivalent to <div id="minutes" style="display:inline-block"></div> minutes or <div id="hours" style="display:inline-block"></div> hours</h3>
+		</br>
+		<h4>that's still <div id="months" style="display: inline-block;"></div> months<h4>
+		</br>
+		<h5><div id="weeks" style="display:inline-block"></div> weeks...</h5>
+	</div>
+</div>
+<script>
+
+//general variables
+var fps = 60;
+var date;
+var tripDate = new Date(2019, 10, 24, 19, 00, 0, 0);
+
+var years;
+var months;
+var weeks;
+var days;
+var hours;
+var minutes;
+var seconds;
+var milliseconds;
+
+
+//divs
+var containerDiv = document.getElementById("container");
+var tripDiv = document.getElementById("trip");
+var monthsDiv = document.getElementById("months");
+var weeksDiv = document.getElementById("weeks");
+var daysDiv = document.getElementById("days");
+var hoursDiv = document.getElementById("hours");
+var minutesDiv = document.getElementById("minutes");
+var secondsDiv = document.getElementById("seconds");
+var millisecondsDiv = document.getElementById("milliseconds");
+
+function startLoop() {
+	setInterval("drawFrame()", 1000 / fps);
+}
+
+function drawFrame() {
+	calcDateValues();
+	monthsDiv.innerHTML = months;
+	weeksDiv.innerHTML = Math.floor(weeks);
+	daysDiv.innerHTML = Math.floor(days);
+	hoursDiv.innerHTML = Math.floor(hours).toLocaleString();
+	minutesDiv.innerHTML = Math.floor(minutes).toLocaleString();
+	secondsDiv.innerHTML = Math.floor(seconds).toLocaleString();
+	millisecondsDiv.innerHTML = milliseconds.toLocaleString();
+}
+
+function calcDateValues() {
+	date = new Date();
+	milliseconds = tripDate - date;
+	seconds = milliseconds / 1000;
+	minutes = seconds / 60;
+	hours = minutes / 60;
+	days = hours / 24;
+	weeks = days / 7;
+	months = tripDate.getMonth() - date.getMonth();
+}
+
+
+
+
+</script>
+</body>
+</html>
